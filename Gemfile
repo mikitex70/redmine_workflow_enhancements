@@ -6,3 +6,4 @@ group :test do
     gem "shoulda"
   end
 end
+gem 'render_super'

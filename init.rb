@@ -1,5 +1,4 @@
 require_dependency 'workflow_enhancements/hooks'
-require_dependency 'workflow_enhancements/patches/action_view_rendering'
 require_dependency 'workflow_enhancements/patches/tracker_patch'
 
 Redmine::Plugin.register :redmine_workflow_enhancements do
