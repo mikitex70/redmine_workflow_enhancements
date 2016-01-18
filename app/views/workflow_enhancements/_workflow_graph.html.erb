@@ -62,12 +62,12 @@
       .rankDir("LR");
     layout = renderer.layout(layout).run(dagreD3.json.decode(json.nodes, json.edges), d3.select("#workflow-vis g"));
 
-    var gw = layout.graph().width;
-    var gh = layout.graph().height;
-    var w = Math.min($(window).width() * 0.8, gw);
-    var h = Math.min($(window).height() * 0.8, gh);
+    var gw = layout.graph().width + 80;
+    var gh = layout.graph().height + 40;
+    var w = Math.min(((document.getElementsByClassName("workflowGraphContainer").length > 0) ? document.getElementsByClassName("workflowGraph")[0].offsetWidth : $(window).width()), gw);
+    var h = Math.min($(window).height(), gh);
     var s = Math.min(w / gw, h / gh);
-    d3.select("svg").attr("width", w + 40).attr("height", h + 40);
+    d3.select("svg").attr("width", w).attr("height", h);
     if (s < 1) {
       d3.select("svg").attr("transform", "scale(" + s + ")");
     }
