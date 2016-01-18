@@ -3,6 +3,7 @@
  roles = Array(roles)
  minimal = false if local_assigns[:minimal].nil?
  issue ||= nil
+ project_roles = @project.users_by_role.map{ |x| x[0][:id] } unless @project.nil?
 %>
 <% if trackers.length == 1 %>
   <%= javascript_include_tag "d3.v3.min.js", :plugin => :redmine_workflow_enhancements %>
@@ -31,7 +32,7 @@
 
   <script type="text/javascript">
   $(function() {
-    var json = <%= WorkflowEnhancements::Graph.load_data(roles, trackers, issue).to_json.html_safe %>;
+    var json = <%= WorkflowEnhancements::Graph.load_data(roles, trackers, issue, project_roles).to_json.html_safe %>;
 
     var renderer = new dagreD3.Renderer();
     var oldDrawNodes = renderer.drawNodes();
