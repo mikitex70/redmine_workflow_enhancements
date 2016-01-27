@@ -64,13 +64,16 @@
 
     var cw = $('div#content').width();
     var dw = $('.workflowGraph').width();
+    var aw = $('.workflowGraph').parent().hasClass("box");
     var t = cw >= 900 ? 20 : 5;
     var gw = layout.graph().width;
     var gh = layout.graph().height;
-    var w = dw == 0 ? Math.min(cw - 2 * t, gw + 2 * t) : dw;
+    var w  = aw ? dw : Math.min(cw - 2 * t, gw + 2 * t);
     var h = Math.min($(window).height() - 2 * t, gh + 2 * t);
     var s  = Math.min((w - 2 * t) / gw, (h - 2 * t) / gh);
-    w  = Math.max(dw, gw * s + 2 * t);
+    if (! aw) {
+      w  = Math.max(dw, gw * s + 2 * t);
+    }
     h  = gh * s + 2 * t;
     var tw = (w - gw * s) / 2;
     $('#workflow-vis').attr('width', w).attr('height', h)
