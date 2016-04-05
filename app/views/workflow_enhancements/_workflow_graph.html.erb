@@ -38,7 +38,7 @@
     <% end %>
     <div class="workflowGraph">
       <svg id="workflow-vis">
-        <filter primitiveUnits="objectBoundingBox" id="glow">
+        <filter id="glow" filterUnits="userSpaceOnUse">
           <feGaussianBlur in="SourceAlpha" stdDeviation="0"></feGaussianBlur>
           <feOffset dx="0" dy="0" result="offsetblur"></feOffset>
           <feFlood flood-color="rgb(206, 223, 14)"></feFlood>
