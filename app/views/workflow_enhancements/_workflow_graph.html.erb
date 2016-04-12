@@ -23,7 +23,7 @@
            user_roles = roles.map(&:id)
            project_roles = roles
          else
-           user_roles = WorkflowTransition.select{|w| w[:tracker_id] == trackers.first.id && w[:old_status_id] != 0}.map(&:role_id) & project_role_ids
+           user_roles = project_role_ids & WorkflowTransition.select{|w| w[:tracker_id] == trackers.first.id && w[:old_status_id] != 0}.map(&:role_id)
          end %>
     </h3>
     <% unless user_roles.empty? %>
