@@ -3,8 +3,8 @@
  roles = Array(roles)
  minimal = false if local_assigns[:minimal].nil?
  issue ||= nil
- project_roles = @project.users_by_role.map{ |x| x[0] } unless @project.nil?
- project_role_ids = project_roles.sort_by(&:position).map(&:id) unless @project.nil?
+ project_roles = @project.users_by_role.map{ |x| x[0] }.sort_by(&:position) unless @project.nil?
+ project_role_ids = project_roles.map(&:id) unless @project.nil?
 %>
 <% if trackers.length == 1 %>
   <%= javascript_include_tag "d3.v3.min.js", :plugin => :redmine_workflow_enhancements %>
