@@ -38,7 +38,7 @@
     <% end %>
     <div class="workflowGraph">
       <svg id="workflow-vis">
-        <filter id="glow" filterUnits="userSpaceOnUse">
+        <filter id="glow" filterUnits="objectBoundingBox">
           <feGaussianBlur in="SourceAlpha" stdDeviation="0"></feGaussianBlur>
           <feOffset dx="0" dy="0" result="offsetblur"></feOffset>
           <feFlood flood-color="rgb(206, 223, 14)"></feFlood>
@@ -99,8 +99,10 @@
       w  = gw * s + 2 * t;
     }
     h = gh * s + 2 * t;
+    $('#workflow-vis').attr('width', w).attr('height', h);
+    w = $('.workflowGraph').width();
+    $('#workflow-vis').attr('width', w);
     var tw = (w - gw * s) / 2;
-    $('#workflow-vis').attr('width', w).attr('height', h)
     var transform = 'translate(' + tw + ',' + t + ')';
     if (s < 1) {
       transform += 'scale(' + s + ')';
