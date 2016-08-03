@@ -38,7 +38,7 @@
     <% end %>
     <div class="workflowGraph">
       <svg id="workflow-vis">
-        <filter id="glow" filterUnits="objectBoundingBox">
+        <filter id="glow" filterUnits="userSpaceOnUse">
           <feGaussianBlur in="SourceAlpha" stdDeviation="0"></feGaussianBlur>
           <feOffset dx="0" dy="0" result="offsetblur"></feOffset>
           <feFlood flood-color="rgb(206, 223, 14)"></feFlood>
@@ -108,6 +108,7 @@
       transform += 'scale(' + s + ')';
     }
     d3.select("#workflow-vis g").attr("transform", transform);
+    $('#glow').attr({"height":gh, "width":gw, "x":0, "y":0});
 
     <% unless minimal %>
       // save as PNG only works in Firefox and Chrome
