@@ -88,6 +88,7 @@
 
     var cw = $('div#content').width();
     var dw = $('.workflowGraph').width();
+    var dh = $(window).height();
     var aw = $('.workflowGraph').parent().hasClass("box");
     var t = cw >= 900 ? 20 : 5;
     var gw = layout.graph().width;
@@ -99,10 +100,14 @@
       w  = gw * s + 2 * t;
     }
     h = gh * s + 2 * t;
+    if (h < dh * .4) {
+      h = dh * .4;
+    }
     $('#workflow-vis').attr('width', w).attr('height', h);
     w = $('.workflowGraph').width();
     $('#workflow-vis').attr('width', w);
     var tw = (w - gw * s) / 2;
+    t = (h - gh * s) / 2;
     var transform = 'translate(' + tw + ',' + t + ')';
     if (s < 1) {
       transform += 'scale(' + s + ')';
