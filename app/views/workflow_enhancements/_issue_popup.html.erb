@@ -5,7 +5,31 @@
 
   <script type="text/javascript">
   $(function() {
-    $('<span id="workflow-help" class="icon icon-help" style="margin-left:4px;cursor:pointer;"></span>')
+    $('div.status.attribute .value').append('<span id="workflow-help-status" class="icon icon-help" style="padding-left:16px;margin-left:4px;cursor:pointer;"></span>');
+
+    $('#workflow-help-status').click(function() {
+      $.ajax({
+        async: true,
+        url: "<%= workflow_show_graph_path(@project.id, @issue.tracker.id, @issue.id || 0) %>",
+        success: function(data) {
+          $("#workflow-dialog").dialog('close');
+          $("#workflow-display").html(data);
+          $("#workflow-dialog").dialog({
+            title: $("#workflow-dialog h3").text(),
+            resizable: false,
+            width: 'auto',
+            height: 'auto',
+            close: function(event, ui) {
+              $(this).dialog('destroy').remove();
+            }
+          });
+        }
+      });
+
+      return false;
+    });
+
+    $('<span id="workflow-help" class="icon icon-help" style="padding-left:16px;margin-left:4px;cursor:pointer;"></span>')
       .insertAfter('#issue_status_id');
 
     $('#workflow-help').click(function() {
