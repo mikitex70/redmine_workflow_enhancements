@@ -4,16 +4,16 @@
   <% end -%>
 
   <script type="text/javascript">
-  if(! $('#workflow-display').length) {
-    $("body").prepend('<div id="workflow-display" style="position:fixed;top:-1000px;"></div>');
-    $('div.status.attribute .value')
-      .append('<span class="icon icon-help" onclick="show_workflow(\'<%= workflow_show_graph_path(@project.id, @issue.tracker.id, @issue.id || 0) %>\')" ' +
-              'style="padding-left:16px;margin-left:4px;cursor:pointer;"></span>');
-  }
+  $("body").prepend('<div id="workflow-display" style="position:fixed;top:-1000px;"></div>');
 
-  $('<span class="icon icon-help" onclick="show_workflow(\'<%= workflow_show_graph_path(@project.id, @issue.tracker.id, @issue.id || 0) %>\')" ' +
-    'style="padding-left:16px;margin-left:4px;cursor:pointer;"></span>')
-    .insertAfter('#issue_status_id');
+  <% @trackers.each_with_index do |tracker,i| %>
+  $(".list.issue-report > tbody > tr")
+    .eq(<%= i %>)
+    .children()
+    .first()
+    .append('<span class="icon icon-help" onclick="show_workflow(\'<%= workflow_show_graph_path(@project.id, tracker.id, 0) %>\')" ' +
+            'style="padding-left:16px;padding-bottom:16px;margin-left:4px;cursor:pointer;float: inline-end;"></span>');
+  <% end %>
 
   function show_workflow(url) {
     $.ajax({
